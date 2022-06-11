@@ -88,8 +88,6 @@ class VectorialMode:
                 s1 += wij * wq[0][q]
                 s2 += wij ** 2
                 s3 += wq[0][q] ** 2
-            if (file.name == '1.txt'):
-                print('a')
             sim.append((file.name, 0 if s2 == 0 or s3 == 0 else s1 / (math.sqrt(s2) * math.sqrt(s3))))
         mor_relevant = sorted(sim, key=lambda x: x[1], reverse=True)
-        return mor_relevant[:k]
+        return [item[0] for item in mor_relevant[:k]]

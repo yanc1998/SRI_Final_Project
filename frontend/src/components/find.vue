@@ -8,7 +8,7 @@
     </b-form>
     <div>
       <b-list-group>
-        <b-list-group-item button v-for="item in this.relevantDocuments">{{
+        <b-list-group-item button v-for="item in this.relevantDocuments" @click="download(item)">{{
             item
           }}
         </b-list-group-item>
@@ -29,10 +29,33 @@ export default {
     }
   },
   methods: {
+    download(name) {
+      console.log(name)
+      const data = JSON.stringify({
+        "file_name": name,
+      });
+      
+      const config = {
+        method: 'post',
+        url: 'http://127.0.0.1:5000/download',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+
+      axios(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    },
     find() {
 
       const data = JSON.stringify({
-        "query": "testz",
+        "query": this.query,
         "count": 5
       });
 
@@ -53,7 +76,6 @@ export default {
           .catch(function (error) {
             console.log(error);
           });
-
     }
 
   }

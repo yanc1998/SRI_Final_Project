@@ -1,5 +1,4 @@
-from ..utils.utils import read_doc
-from flask import send_file
+from flask import send_file, send_from_directory
 
 
 class FileService:

@@ -25,8 +25,9 @@ class ExpandQuery:
                     self.count_words[file.tokens[i]] = 1
 
                 self.relations_words[file.tokens[i]] = []
-
-                if i == len(file.tokens) - 1:
+                print(i, len(file.tokens))
+                if i == len(file.tokens) - 2:
+                    print('entrooo')
                     try:
                         self.count_words[file.tokens[i + 1]] += 1
                     except:
@@ -34,14 +35,20 @@ class ExpandQuery:
 
                     self.relations_words[file.tokens[i + 1]] = []
 
-        for rel in self.relations.values():
-            self.relations[rel] /= self.count_words[rel[0]]
+        # print(self.relations)
+        # print(self.count_words)
+        for rel in self.relations.keys():
+            # print(rel)
+            self.relations[rel] = self.relations[rel] / self.count_words[rel[0]]
 
         for file in self.files:
             for word1 in file.tokens:
                 for word2 in file.tokens:
-                    if word2 != word1 and self.relations[(word1, word2)] > alpha:
-                        self.relations_words[word1].append(word2)
+                    try:
+                        if word2 != word1 and self.relations[(word1, word2)] > alpha:
+                            self.relations_words[word1].append(word2)
+                    except:
+                        pass
 
     def expand_query(self, query):
         expand_query = []

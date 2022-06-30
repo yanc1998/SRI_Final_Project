@@ -1,3 +1,5 @@
+from .text_preprocessor import word_tokenize, normalize
+
 class Token:
     def __init__(self, value, pos):
         self.value = value
@@ -11,3 +13,14 @@ class Token:
             raise Exception('pos most be a positive integer ')
 
         return Token(value, pos)
+
+
+def tokenizer(text):
+    text = text.lower()
+    words = word_tokenize(text)
+    words = normalize(words)
+    #tokens = []
+    #for i, word in enumerate(words):
+    #    tokens.append(Token.new(word, pos + i))
+    #return tokens
+    return words

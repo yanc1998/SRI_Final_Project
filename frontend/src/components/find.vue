@@ -28,7 +28,6 @@
           }}
         </b-list-group-item>
       </b-list-group>
-      <p>{{ text }}</p>
     </div>
 
   </div>
@@ -107,6 +106,7 @@ export default {
             console.log(JSON.stringify(response.data["data"]));
             this.relevantDocuments = response.data["data"][0]
             this.expand = response.data["data"][1]
+            console.log(this.expand)
           })
           .catch(function (error) {
             console.log(error);

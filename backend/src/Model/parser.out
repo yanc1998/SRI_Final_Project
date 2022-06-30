@@ -1,0 +1,187 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expr
+Rule 1     expr -> expr OR expr
+Rule 2     expr -> expr AND expr
+Rule 3     expr -> NOT expr
+Rule 4     expr -> LP expr RP
+Rule 5     expr -> TOKEN
+
+Terminals, with rules where they appear
+
+AND                  : 2
+LP                   : 4
+NOT                  : 3
+OR                   : 1
+RP                   : 4
+TOKEN                : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 1 1 2 2 3 4 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expr
+    (1) expr -> . expr OR expr
+    (2) expr -> . expr AND expr
+    (3) expr -> . NOT expr
+    (4) expr -> . LP expr RP
+    (5) expr -> . TOKEN
+
+    NOT             shift and go to state 2
+    LP              shift and go to state 3
+    TOKEN           shift and go to state 4
+
+    expr                           shift and go to state 1
+
+state 1
+
+    (0) S' -> expr .
+    (1) expr -> expr . OR expr
+    (2) expr -> expr . AND expr
+
+    OR              shift and go to state 5
+    AND             shift and go to state 6
+
+
+state 2
+
+    (3) expr -> NOT . expr
+    (1) expr -> . expr OR expr
+    (2) expr -> . expr AND expr
+    (3) expr -> . NOT expr
+    (4) expr -> . LP expr RP
+    (5) expr -> . TOKEN
+
+    NOT             shift and go to state 2
+    LP              shift and go to state 3
+    TOKEN           shift and go to state 4
+
+    expr                           shift and go to state 7
+
+state 3
+
+    (4) expr -> LP . expr RP
+    (1) expr -> . expr OR expr
+    (2) expr -> . expr AND expr
+    (3) expr -> . NOT expr
+    (4) expr -> . LP expr RP
+    (5) expr -> . TOKEN
+
+    NOT             shift and go to state 2
+    LP              shift and go to state 3
+    TOKEN           shift and go to state 4
+
+    expr                           shift and go to state 8
+
+state 4
+
+    (5) expr -> TOKEN .
+
+    OR              reduce using rule 5 (expr -> TOKEN .)
+    AND             reduce using rule 5 (expr -> TOKEN .)
+    $end            reduce using rule 5 (expr -> TOKEN .)
+    RP              reduce using rule 5 (expr -> TOKEN .)
+
+
+state 5
+
+    (1) expr -> expr OR . expr
+    (1) expr -> . expr OR expr
+    (2) expr -> . expr AND expr
+    (3) expr -> . NOT expr
+    (4) expr -> . LP expr RP
+    (5) expr -> . TOKEN
+
+    NOT             shift and go to state 2
+    LP              shift and go to state 3
+    TOKEN           shift and go to state 4
+
+    expr                           shift and go to state 9
+
+state 6
+
+    (2) expr -> expr AND . expr
+    (1) expr -> . expr OR expr
+    (2) expr -> . expr AND expr
+    (3) expr -> . NOT expr
+    (4) expr -> . LP expr RP
+    (5) expr -> . TOKEN
+
+    NOT             shift and go to state 2
+    LP              shift and go to state 3
+    TOKEN           shift and go to state 4
+
+    expr                           shift and go to state 10
+
+state 7
+
+    (3) expr -> NOT expr .
+    (1) expr -> expr . OR expr
+    (2) expr -> expr . AND expr
+
+    OR              reduce using rule 3 (expr -> NOT expr .)
+    AND             reduce using rule 3 (expr -> NOT expr .)
+    $end            reduce using rule 3 (expr -> NOT expr .)
+    RP              reduce using rule 3 (expr -> NOT expr .)
+
+  ! OR              [ shift and go to state 5 ]
+  ! AND             [ shift and go to state 6 ]
+
+
+state 8
+
+    (4) expr -> LP expr . RP
+    (1) expr -> expr . OR expr
+    (2) expr -> expr . AND expr
+
+    RP              shift and go to state 11
+    OR              shift and go to state 5
+    AND             shift and go to state 6
+
+
+state 9
+
+    (1) expr -> expr OR expr .
+    (1) expr -> expr . OR expr
+    (2) expr -> expr . AND expr
+
+    OR              reduce using rule 1 (expr -> expr OR expr .)
+    $end            reduce using rule 1 (expr -> expr OR expr .)
+    RP              reduce using rule 1 (expr -> expr OR expr .)
+    AND             shift and go to state 6
+
+  ! AND             [ reduce using rule 1 (expr -> expr OR expr .) ]
+  ! OR              [ shift and go to state 5 ]
+
+
+state 10
+
+    (2) expr -> expr AND expr .
+    (1) expr -> expr . OR expr
+    (2) expr -> expr . AND expr
+
+    OR              reduce using rule 2 (expr -> expr AND expr .)
+    AND             reduce using rule 2 (expr -> expr AND expr .)
+    $end            reduce using rule 2 (expr -> expr AND expr .)
+    RP              reduce using rule 2 (expr -> expr AND expr .)
+
+  ! OR              [ shift and go to state 5 ]
+  ! AND             [ shift and go to state 6 ]
+
+
+state 11
+
+    (4) expr -> LP expr RP .
+
+    OR              reduce using rule 4 (expr -> LP expr RP .)
+    AND             reduce using rule 4 (expr -> LP expr RP .)
+    $end            reduce using rule 4 (expr -> LP expr RP .)
+    RP              reduce using rule 4 (expr -> LP expr RP .)
+

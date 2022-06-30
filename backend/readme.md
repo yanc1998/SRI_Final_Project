@@ -1,2 +1,5 @@
-export FLASK_APP=main      
+para correr el servidor
+
+
+export FLASK_APP=main \
 flask run
